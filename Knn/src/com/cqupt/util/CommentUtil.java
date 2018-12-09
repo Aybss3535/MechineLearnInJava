@@ -9,16 +9,16 @@ import com.cqupt.entity.Distance;
 import com.cqupt.entity.Point;
 
 /**
- * 普通工具类
+ * 鏅�氬伐鍏风被
  *<p>title:CommentUtil</p>
  *<p>Decription:</p>
  * @author songxuan
- * @date  上午11:28:27
+ * @date  涓婂崍11:28:27
  */
 public class CommentUtil {
 	
 	/**
-	 * 获取欧式距离
+	 * 鑾峰彇娆у紡璺濈
 	 * @param pointer1
 	 * @param pointer2
 	 * @return
@@ -29,7 +29,7 @@ public class CommentUtil {
 	}
 	
 	/**
-	 * 获取距离测试点最近的k个点的类型及数量
+	 * 鑾峰彇璺濈娴嬭瘯鐐规渶杩戠殑k涓偣鐨勭被鍨嬪強鏁伴噺
 	 * @param distanceList
 	 * @param pointList
 	 * @param k
@@ -49,7 +49,7 @@ public class CommentUtil {
 				}
 			}
 			i++;
-			if(i==3){
+			if(i==k){
 				break;
 			}
 		}
@@ -57,7 +57,7 @@ public class CommentUtil {
 	}
 	
 	/**
-	 * 获取距离最近的K个点中出现频率最多的类型
+	 * 鑾峰彇璺濈鏈�杩戠殑K涓偣涓嚭鐜伴鐜囨渶澶氱殑绫诲瀷
 	 * @param map
 	 * @return
 	 */
