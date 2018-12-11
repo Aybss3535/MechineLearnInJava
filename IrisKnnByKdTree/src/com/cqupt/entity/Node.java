@@ -1,6 +1,8 @@
 package com.cqupt.entity;
 
-public class Node implements Comparable<Node> {
+import java.io.Serializable;
+
+public class Node implements Comparable<Node>,Serializable{
 
 	//´æ´¢µÄÊý¾Ý
 	public double[] data;

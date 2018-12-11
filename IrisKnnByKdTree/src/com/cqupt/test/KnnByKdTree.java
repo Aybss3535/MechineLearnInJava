@@ -1,7 +1,11 @@
 package com.cqupt.test;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +13,12 @@ import java.util.Map;
 import com.cqupt.entity.Node;
 import com.cqupt.util.BinaryTreeOrder;
 import com.cqupt.util.DataSetUtil;
+import com.cqupt.util.IOUtil;
 
 public class KnnByKdTree {
 
 	public static void main(String[] args) {
+		long startTime=System.currentTimeMillis();
 		DataSetUtil dataSetUtil = new DataSetUtil();
 		List<Node> trainSets = new ArrayList<>();
 		List<Node> testSets = new ArrayList<>();
@@ -24,15 +30,38 @@ public class KnnByKdTree {
 		}
 		KnnByKdTree kdTree = new KnnByKdTree();
 		Node root = kdTree.buildKdTree(trainSets, 0);
+//		IOUtil io = new IOUtil();
+//		Node root=null;
+//		try {
+////			io.SerializeRoot(root);//序列化，将树存储与硬盘中
+//				root=io.DeSerializeRoot();//反序列化，将树从硬盘中读取
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		// new BinaryTreeOrder().preOrder(root);//前序遍历
+		double error=0.0;
 		for (Node testNode : testSets) {
 			List<Node> knnList = kdTree.searchKnn(root, testNode, 3);
 //			for (Node node : knnList) {
 //				System.out.println(node.toString());
 //			}
 			String type = kdTree.getMaxType(knnList);
-			System.out.println("预测为：" + type+",实际为："+testNode.type);
+			System.out.println("将点("+testNode.getData(0)+","+testNode.getData(1)
+				+","+testNode.getData(2)+","+testNode.getData(3)+")预测为：" + type+",实际为："+testNode.type);
+			if(!type.equals(testNode.type)){
+				error++;
+			}
 		}
+		System.out.println("错误率为："+(error/testSets.size()));
+		long endTime = System.currentTimeMillis();
+		System.out.println("共用时"+(endTime-startTime)+"ms");
 
 	}
 
